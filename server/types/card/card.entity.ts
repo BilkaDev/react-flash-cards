@@ -4,5 +4,4 @@ export interface CardEntity {
    answer: string;
    memorized: boolean;
    deckId: string;
-   deckName?: string;
 }

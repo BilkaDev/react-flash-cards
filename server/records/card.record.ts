@@ -11,7 +11,6 @@ export class CardRecord implements CardEntity{
     public answer: string;
     public memorized: boolean;
     public deckId: string;
-    public deckName?: string;
 
     constructor(obj: CardEntity) {
         if (!obj.question || obj.question.length < 1 || obj.question.length > 100) {
@@ -25,7 +24,6 @@ export class CardRecord implements CardEntity{
         this.answer = obj.answer;
         this.memorized = obj.memorized;
         this.deckId = obj.deckId;
-        this.deckName = obj.deckName;
 
     }
 
@@ -44,13 +42,13 @@ export class CardRecord implements CardEntity{
 
     static async listAll(): Promise<CardRecord[]> {
         const [results] = (await pool.execute(
-            "SELECT `flashcards_decks`.`name` AS `deckName`, `flashcards_cards`.`deckId`, `flashcards_cards`.`id`, `flashcards_cards`.`question`, `flashcards_cards`.`answer`, `flashcards_cards`.`memorized` FROM `flashcards_decks` JOIN `flashcards_cards` ON `flashcards_decks`.`id` = `flashcards_cards`.`deckId`")) as CardRecordResults;
+            "SELECT * FROM `flashcards_cards`")) as CardRecordResults;
         return results.map(obj => new CardRecord(obj));
     }
 
     static async listAllInDeck(deckId: string): Promise<CardRecord[]> {
         const [results] = (await pool.execute(
-            "SELECT `flashcards_decks`.`name` AS `deckName`, `flashcards_cards`.`deckId`, `flashcards_cards`.`id`, `flashcards_cards`.`question`, `flashcards_cards`.`answer`, `flashcards_cards`.`memorized` FROM `flashcards_decks` JOIN `flashcards_cards` ON `flashcards_decks`.`id` = `flashcards_cards`.`deckId` WHERE `flashcards_decks`.`id` = :deckId", {
+            "SELECT * FROM `flashcards_cards` WHERE `flashcards_cards`.`deckId` = :deckId", {
                 deckId,
             })) as CardRecordResults;
         return results.map(obj => new CardRecord(obj));
