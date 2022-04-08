@@ -29,7 +29,7 @@ app.get('/test', async (req, res) => {
     // await deleteDeck.delete();
 
 
-//test record card
+//test record deck
 
     // const newCard = new CardRecord({
     //     question: "Kupić",

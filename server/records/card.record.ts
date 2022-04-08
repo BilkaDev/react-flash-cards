@@ -1,10 +1,11 @@
 import {v4 as uuid} from "uuid";
 import {pool} from '../utils/db'
 import {FieldPacket} from "mysql2";
+import {CardEntity} from "../types/card";
 
 type CardRecordResults = [CardRecord[], FieldPacket[]];
 
-export class CardRecord {
+export class CardRecord implements CardEntity{
     public id?: string;
     public question: string;
     public answer: string;
@@ -12,7 +13,7 @@ export class CardRecord {
     public deckId: string;
     public deckName?: string;
 
-    constructor(obj: CardRecord) {
+    constructor(obj: CardEntity) {
         if (!obj.question || obj.question.length < 1 || obj.question.length > 100) {
             throw new Error('The question must be between 1 and 100 characters long.')
         }
@@ -46,14 +47,14 @@ export class CardRecord {
             "SELECT `flashcards_decks`.`name` AS `deckName`, `flashcards_cards`.`deckId`, `flashcards_cards`.`id`, `flashcards_cards`.`question`, `flashcards_cards`.`answer`, `flashcards_cards`.`memorized` FROM `flashcards_decks` JOIN `flashcards_cards` ON `flashcards_decks`.`id` = `flashcards_cards`.`deckId`")) as CardRecordResults;
         return results.map(obj => new CardRecord(obj));
     }
-    static async listAllInDeck(deckId:string): Promise<CardRecord[]> {
+
+    static async listAllInDeck(deckId: string): Promise<CardRecord[]> {
         const [results] = (await pool.execute(
-            "SELECT `flashcards_decks`.`name` AS `deckName`, `flashcards_cards`.`deckId`, `flashcards_cards`.`id`, `flashcards_cards`.`question`, `flashcards_cards`.`answer`, `flashcards_cards`.`memorized` FROM `flashcards_decks` JOIN `flashcards_cards` ON `flashcards_decks`.`id` = `flashcards_cards`.`deckId` WHERE `flashcards_decks`.`id` = :deckId",{
+            "SELECT `flashcards_decks`.`name` AS `deckName`, `flashcards_cards`.`deckId`, `flashcards_cards`.`id`, `flashcards_cards`.`question`, `flashcards_cards`.`answer`, `flashcards_cards`.`memorized` FROM `flashcards_decks` JOIN `flashcards_cards` ON `flashcards_decks`.`id` = `flashcards_cards`.`deckId` WHERE `flashcards_decks`.`id` = :deckId", {
                 deckId,
             })) as CardRecordResults;
         return results.map(obj => new CardRecord(obj));
     }
-
 
 
     static async getOne(id: string): Promise<CardRecord | null> {
@@ -79,7 +80,6 @@ export class CardRecord {
             id: this.id,
         });
     }
-
 
 
 }
