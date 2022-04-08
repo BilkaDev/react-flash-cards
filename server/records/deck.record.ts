@@ -1,5 +1,5 @@
 import {v4 as uuid} from "uuid";
-import {pool} from './../utils/db'
+import {pool} from '../utils/db'
 import {FieldPacket} from "mysql2";
 
 type DeckRecordResults = [DeckRecord[], FieldPacket[]];
