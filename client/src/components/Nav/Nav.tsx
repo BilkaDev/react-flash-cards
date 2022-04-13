@@ -1,19 +1,25 @@
-import React from 'react';
+import React, {MouseEvent, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
 
 export const Nav = () => {
 
+    const [select, setSelect] = useState<string>("deck")
+
     const colorOfLink = ({isActive}: {
         isActive: boolean;
-    }) => (isActive ? 'Nav__item--active Nav__item' : 'Nav__item');
+    }) => (isActive ? 'Nav__item--active ' : 'Nav__item');
+
+    function activeMenu(name: string) {
+        setSelect(name)
+    }
 
     return (
         <div className="wrapper">
             <nav className="Nav">
-                <NavLink  className={colorOfLink}  to="/decks">Decks</NavLink>
-                <NavLink  className={colorOfLink} to="/add">Add</NavLink>
-                <NavLink  className={colorOfLink} to="/browse">Browse</NavLink>
+                <NavLink onClick={() => activeMenu("deck")} className={`Nav__item ${"deck" === select && "Nav__item--active"}`} to="/">Decks</NavLink>
+                <NavLink onClick={() => activeMenu("add")} className={`Nav__item ${"add" === select && "Nav__item--active"}`} to="/add">Add Flashcard</NavLink>
+                <NavLink onClick={() => activeMenu("browse")} className={`Nav__item ${"browse" === select && "Nav__item--active"}`} to="/browse">Browse</NavLink>
             </nav>
         </div>
     )

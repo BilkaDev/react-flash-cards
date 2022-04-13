@@ -1,20 +1,16 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import {Header} from './components/Header/Header';
 import {Nav} from "./components/Nav/Nav";
-import {NotFoundView} from "./views/NotFoundView";
+import {Router} from "./components/Router/Router";
+
 
 function App() {
     return (
         <>
             <Header/>
             <Nav/>
-            <Routes>
-                <Route path="*" element={<NotFoundView/>}/>
-            </Routes>
-
-
+            <Router/>
         </>)
 }
 

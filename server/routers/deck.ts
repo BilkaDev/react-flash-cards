@@ -29,7 +29,9 @@ deckRouter
     })
     .post('/', async (req, res) => {
         const newDeck = new DeckRecord(req.body as CreateDeckReq);
-        res.json(await newDeck.insert());
+        await newDeck.insert()
+
+        res.json(newDeck);
 
     })
     .patch('/:deckId', async (req, res) => {
