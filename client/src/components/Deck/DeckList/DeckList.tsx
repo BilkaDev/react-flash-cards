@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {DeckTable} from "./DeckTable";
-import {Spinner} from "../common/Spinner/Spinner";
+
+import {Spinner} from "../../common/Spinner/Spinner";
 import {DeckEntity} from "types";
-import {Route, Routes} from "react-router-dom";
-import {DecksView} from "../../views/DecksView";
-import {NotFoundView} from "../../views/NotFoundView";
+import {DeckTable} from "./DeckTable";
+
 
 export const DeckList = () => {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {DeckList} from "../components/Deck/DeckList";
+import {DeckList} from "../components/Deck/DeckList/DeckList";
 import {Link} from "react-router-dom";
 
 

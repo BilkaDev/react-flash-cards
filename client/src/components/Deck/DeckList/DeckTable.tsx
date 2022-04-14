@@ -2,6 +2,7 @@ import React from 'react';
 import {DeckEntity} from "types";
 import {DeckTableRow} from "./DeckTableRow";
 
+
 interface Props {
     deckList: DeckEntity[],
     refleshDeck: () => void,
@@ -14,7 +15,9 @@ export const DeckTable = (props: Props) => {
             <thead>
             <tr>
                 <th>Deck name</th>
+                <th>More Info</th>
                 <th>Edit deck</th>
+                <th>Study</th>
                 <th>Delete deck</th>
             </tr>
             </thead>

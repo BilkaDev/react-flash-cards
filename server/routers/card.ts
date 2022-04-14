@@ -19,9 +19,7 @@ cardRouter
         const {deckId} = req.params;
         const cardListInDeck = await CardRecord.listAllInDeck(deckId)
 
-        res.json({
-            cardListInDeck,
-        });
+        res.json(cardListInDeck);
     })
     .get('/one/:cardId', async (req, res) => {
         const card = await CardRecord.getOne(req.params.cardId);
@@ -39,8 +37,6 @@ cardRouter
 
 
         const card = await CardRecord.getOne(cardId);
-        console.log(card)
-
         const newCard = new CardRecord({
             ...card,
             ...body,

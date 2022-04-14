@@ -9,10 +9,11 @@ export class CardRecord implements CardEntity{
     public id?: string;
     public question: string;
     public answer: string;
-    public memorized: boolean;
+    public memorized?: boolean;
     public deckId: string;
 
     constructor(obj: CardEntity) {
+
         if (!obj.question || obj.question.length < 1 || obj.question.length > 100) {
             throw new Error('The question must be between 1 and 100 characters long.')
         }
@@ -29,6 +30,9 @@ export class CardRecord implements CardEntity{
 
     async insert(): Promise<string> {
         if (!this.id) this.id = uuid();
+        if (!this.memorized) {
+            this.memorized = false;
+        }
         await pool.execute("INSERT INTO `flashcards_cards`(`id`, `question`,`answer`,`memorized`,`deckId`) VALUES(:id, :question, :answer, :memorized, :deckId)", {
             id: this.id,
             question: this.question,

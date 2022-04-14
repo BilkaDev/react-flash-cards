@@ -2,6 +2,6 @@ export interface CardEntity {
    id?: string;
    question: string;
    answer: string;
-   memorized: boolean;
+   memorized?: boolean;
    deckId: string;
 }
