@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {CardEntity, DeckEntity} from "types";
 import {DeckSelect} from "../DeckSelect";
 import {Spinner} from "../../common/Spinner/Spinner";
 import {DeckSelectTable} from "./DeckSelectTable";
+import {useParams} from "react-router-dom";
 
 
 export const DeckBrowse = () => {
-    const [selected, setSelected] = useState<string>("");
+    const {id : deckId} = useParams();
+    const [selected, setSelected] = useState<string>( deckId || "");
 
 
     const [data, setData] = useState<DeckEntity[] | null>(null);

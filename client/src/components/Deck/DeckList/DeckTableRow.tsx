@@ -39,7 +39,7 @@ export const DeckTableRow = (props: Props) => {
             <td>{deck.name}</td>
             <td><Link to={`/deck-info/${deck.id}`}>More</Link></td>
             <td><Link to={`/edit-deck/${deck.id}/${deck.name}`}>Edit</Link></td>
-            <td><Link to={`/study-deck/${deck.id}/${deck.name}`}>study</Link></td>
+            <td><Link to={`/study-deck/${deck.id}`}>study</Link></td>
             <td> <a href="#" onClick={deleteDeck}>🗑️</a></td>
         </tr>
 

@@ -16,7 +16,7 @@ export const DeckInfo = () => {
     const refreshGifts = async () => {
         try {
             setData(null);
-            const res = await fetch(`http://localhost:3001/card/${id}`);
+            const res = await fetch(`http://localhost:3001/deck/${id}`);
             setData(await res.json());
         }catch (e : any){
             setError(true)
@@ -36,7 +36,6 @@ export const DeckInfo = () => {
     if (data === null) {
         return <Spinner/>;
     }
-
     return (
         <>
             <table>

@@ -24,6 +24,7 @@ export const EditCard = () => {
 
     const [data, setData] = useState<DeckEntity[] | null>(null);
     const [error, setError] = useState<boolean>(false);
+
     const refreshGifts = async () => {
         setData(null);
 
@@ -34,8 +35,9 @@ export const EditCard = () => {
             setSelected(deck[0].id as string)
 
             const resCard = await fetch(`http://localhost:3001/card/one/${cardId}`);
-            const card = await resCard.json() as DeckEntity[]
+            const card = await resCard.json() as CardEntity
             setForm(form => ({...form, ...card}))
+            setSelected(card.deckId)
         } catch (e) {
             setError(true)
         }

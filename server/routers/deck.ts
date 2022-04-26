@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {DeckRecord} from '../records/deck.record';
-import {CreateDeckReq} from "../types";
+import {CreateDeckReq, ListDeckRes} from "../types";
 import {CardRecord} from "../records/card.record";
 
 export const deckRouter = Router();
@@ -14,18 +14,17 @@ deckRouter
     .get('/:deckId', async (req, res) => {
 
         const {deckId} = req.params;
-        const deck = await DeckRecord.getOne(deckId);
+        const deck  = await DeckRecord.getOne(deckId);
         if (!deck) {
             throw new Error ('File not found');
         }
         const cardList = await CardRecord.listAllInDeck(deckId)
 
-        // zastanowie się czy potrzebuje tak to pobierać czy leipiej oddzielnie
 
         res.json({
             deck,
             cardList,
-        });
+        } as ListDeckRes);
     })
     .post('/', async (req, res) => {
         const newDeck = new DeckRecord(req.body as CreateDeckReq);
