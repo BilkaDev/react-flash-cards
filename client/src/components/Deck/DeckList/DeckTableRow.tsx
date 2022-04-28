@@ -1,4 +1,4 @@
-import React, {MouseEvent, useEffect} from 'react';
+import React, {MouseEvent} from 'react';
 import {DeckEntity} from "types";
 import {Link} from "react-router-dom";
 

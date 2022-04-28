@@ -1,14 +1,10 @@
-import React, {MouseEvent, useState} from 'react';
+import React, { useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
 
 export const Nav = () => {
 
     const [select, setSelect] = useState<string>("deck")
-
-    const colorOfLink = ({isActive}: {
-        isActive: boolean;
-    }) => (isActive ? 'Nav__item--active ' : 'Nav__item');
 
     function activeMenu(name: string) {
         setSelect(name)

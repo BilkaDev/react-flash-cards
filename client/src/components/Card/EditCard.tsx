@@ -3,6 +3,7 @@ import {CardEntity, CreateCardReq, DeckEntity} from "types";
 import {DeckSelect} from "../Deck/DeckSelect";
 import {Spinner} from "../common/Spinner/Spinner";
 import {useParams} from "react-router-dom";
+import {cardValidation} from "../../utils/card-validation";
 
 
 export const EditCard = () => {
@@ -50,7 +51,7 @@ export const EditCard = () => {
     }, []);
 
 
-    function updateForm(key: string, value: any) {
+    function updateForm(key: string, value: string) {
 
         setForm(form => {
             if (value.length >= 1 && value.length <= 100) setValidation(null)
@@ -63,18 +64,15 @@ export const EditCard = () => {
 
 
     const sendForm = async (e: FormEvent) => {
-        setError(false)
         e.preventDefault()
-        if (form.question.length < 1 || form.question.length > 100) {
-            return setValidation("The front must be between 1 and 100 characters long.")
+        const validation = cardValidation(form)
+        if (validation){
+            return setValidation(validation)
         }
 
-        if (form.answer.length < 1 || form.answer.length > 100) {
-            return setValidation("The back must be between 1 and 100 characters long.")
-        }
-
-
+        setError(false)
         setLoading(true)
+
         try {
             const res = await fetch(`http://localhost:3001/card/${cardId}`, {
                 method: 'PATCH',

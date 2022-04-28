@@ -1,7 +1,8 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {CardEntity, CreateCardReq, DeckEntity} from "types";
+import {CreateCardReq, DeckEntity} from "types";
 import {DeckSelect} from "../Deck/DeckSelect";
 import {Spinner} from "../common/Spinner/Spinner";
+import {cardValidation} from "../../utils/card-validation";
 
 
 export const AddCard = () => {
@@ -40,7 +41,7 @@ export const AddCard = () => {
     }, []);
 
 
-    function updateForm(key: string, value: any) {
+    function updateForm(key: string, value: string) {
 
         setForm(form => {
             if (value.length >= 1 && value.length <= 100) setValidation(null)
@@ -54,16 +55,10 @@ export const AddCard = () => {
 
     const sendForm = async (e: FormEvent) => {
         e.preventDefault()
-        if (form.question.length < 1 || form.question.length > 100) {
-            return setValidation("The front must be between 1 and 100 characters long.")
+        const validation = cardValidation(form)
+        if (validation){
+            return setValidation(validation)
         }
-
-        if (form.answer.length < 1 || form.answer.length > 100) {
-            return setValidation("The back must be between 1 and 100 characters long.")
-        }
-
-
-        setLoading(true)
         try {
             const res = await fetch('http://localhost:3001/card', {
                 method: 'POST',
@@ -72,7 +67,7 @@ export const AddCard = () => {
                 },
                 body: JSON.stringify({...form,deckId: selected} as CreateCardReq)
             });
-            const data: DeckEntity = await res.json();
+            await res.json();
             setResultInfo(`card has been created.`);
         } catch (e) {
             setError(true)

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {DeckEntity} from "types";
 
 
 interface Props {
     data: DeckEntity[];
     selected: string;
-    setSelected: any;
+    setSelected: (value: string) => void;
     addCard?: boolean;
 }
 

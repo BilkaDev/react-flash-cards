@@ -2,13 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {ListDeckRes} from "types";
 import {Spinner} from "../../common/Spinner/Spinner";
-import {StudyBtnShow} from "./StudyBtnShow";
-import {StudyBtnRemember} from "./StudyBtnRemember";
 import {StudyCard} from "./StudyCard";
 
-function StudyBtnRemeber() {
-    return null;
-}
 
 export const StudyDeck = () => {
 
@@ -29,7 +24,7 @@ export const StudyDeck = () => {
             setData(null);
             const res = await fetch(`http://localhost:3001/deck/${id}`);
             setData(await res.json());
-        }catch (e : any){
+        }catch (e){
             setError(true)
         }finally {
 

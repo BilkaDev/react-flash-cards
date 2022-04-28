@@ -13,16 +13,13 @@ export const EditDeck = () => {
         name: name as string,
     })
 
-
-
-
     const [loading, setLoading] = useState<boolean>(false);
     const [validation, setValidation] = useState<string | null>(null);
     const [error, setError] = useState<boolean>(false);
     const [resultInfo, setResultInfo] = useState<string | null>(null);
 
 
-    function updateForm(key: string, value: any) {
+    function updateForm(key: string, value: string) {
 
         setForm(form => {
             if (value.length >= 3 && value.length <= 25) setValidation(null)

@@ -6,7 +6,7 @@ import {CardEntity, DeckEntity} from "types";
 interface Props {
     deckId: string;
     cardList: CardEntity[];
-    setReflesh: any;
+    setReflesh: (value : boolean) => void;
     deckList: DeckEntity[];
 }
 

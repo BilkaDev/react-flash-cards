@@ -1,4 +1,4 @@
-import React, {MouseEvent} from "react";
+import React from "react";
 import {CardEntity, DeckEntity} from "types";
 import {handleDelete} from "../../../utils/delete";
 import {Link} from 'react-router-dom';
@@ -7,14 +7,14 @@ import {Link} from 'react-router-dom';
 interface Props {
     deckId: string;
     cardList: CardEntity[];
-    setReflesh: any
+    setReflesh: (value : boolean) => void;
     deckList: DeckEntity[]
 
 }
 
 export const DeckSelectRow = (props: Props) => {
 
-    const {deckId, cardList, setReflesh, deckList} = props;
+    const {cardList, setReflesh, deckList} = props;
 
     async function clickDelete(card: string, id: string) {
         await handleDelete(card, card, id)

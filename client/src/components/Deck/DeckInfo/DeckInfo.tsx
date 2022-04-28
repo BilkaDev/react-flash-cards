@@ -18,7 +18,7 @@ export const DeckInfo = () => {
             setData(null);
             const res = await fetch(`http://localhost:3001/deck/${id}`);
             setData(await res.json());
-        }catch (e : any){
+        }catch (e){
             setError(true)
         }finally {
 

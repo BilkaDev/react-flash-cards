@@ -15,7 +15,7 @@ export const AddDeck = () => {
     const [resultInfo, setResultInfo] = useState<string | null>(null);
 
 
-    function updateForm(key: string, value: any) {
+    function updateForm(key: string, value: string) {
 
         setForm(form => {
             if (value.length >= 3 && value.length <= 25) setValidation(null)
