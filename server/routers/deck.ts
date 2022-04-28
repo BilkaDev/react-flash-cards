@@ -2,6 +2,7 @@ import {Router} from 'express';
 import {DeckRecord} from '../records/deck.record';
 import {CreateDeckReq, ListDeckRes} from "../types";
 import {CardRecord} from "../records/card.record";
+import {notFoundElement} from "../utils/not-found-element";
 
 export const deckRouter = Router();
 
@@ -39,6 +40,7 @@ deckRouter
             name: string
         } = req.body;
         const deck = await DeckRecord.getOne(deckId);
+        notFoundElement(deck);
         deck.name = newName;
         await deck.update();
         res.json(deck);
@@ -46,9 +48,7 @@ deckRouter
     .delete('/:id', async (req, res) => {
         const {id} = req.params;
         const deck = await DeckRecord.getOne(id)
-        if (!deck) {
-            throw new Error ('File not found');
-        }
+        notFoundElement(deck);
         await deck.delete();
         res.end();
     })

@@ -1,10 +1,8 @@
 import {Router} from 'express';
-import {DeckRecord} from "../records/deck.record";
 import {CardRecord} from "../records/card.record";
-import {CreateDeckReq} from "../types";
-import {deckRouter} from "./deck";
-import {CreateCardReq} from "../types/card/card";
-import {CardEntity} from "../types/card";
+import {CreateCardReq} from "../types";
+import {CardEntity} from "../types";
+import {notFoundElement} from "../utils/not-found-element";
 
 export const cardRouter = Router();
 
@@ -34,9 +32,8 @@ cardRouter
     .patch('/:cardId', async (req, res) => {
         const {cardId} = req.params;
         const {body}:{body : CardEntity} = req
-
-
         const card = await CardRecord.getOne(cardId);
+        notFoundElement(card);
         const newCard = new CardRecord({
             ...card,
             ...body,
@@ -51,9 +48,8 @@ cardRouter
     .delete('/:id', async (req, res) => {
         const {id} = req.params;
         const card = await CardRecord.getOne(id)
-        if (!card) {
-            throw new Error ('File not found');
-        }
+        notFoundElement(card);
+
         await card.delete();
         res.end();
     })

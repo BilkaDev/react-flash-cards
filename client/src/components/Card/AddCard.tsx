@@ -2,7 +2,7 @@ import React, {FormEvent, useEffect, useState} from 'react';
 import {CreateCardReq, DeckEntity} from "types";
 import {DeckSelect} from "../Deck/DeckSelect";
 import {Spinner} from "../common/Spinner/Spinner";
-import {cardValidation} from "../../utils/card-validation";
+import {cardValidation} from "../../utils/cardValidation";
 
 
 export const AddCard = () => {

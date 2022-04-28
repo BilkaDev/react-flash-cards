@@ -3,7 +3,7 @@ import {CardEntity, CreateCardReq, DeckEntity} from "types";
 import {DeckSelect} from "../Deck/DeckSelect";
 import {Spinner} from "../common/Spinner/Spinner";
 import {useParams} from "react-router-dom";
-import {cardValidation} from "../../utils/card-validation";
+import {cardValidation} from "../../utils/cardValidation";
 
 
 export const EditCard = () => {

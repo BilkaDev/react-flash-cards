@@ -2,6 +2,7 @@ import {v4 as uuid} from "uuid";
 import {pool} from '../utils/db'
 import {FieldPacket} from "mysql2";
 import {CardEntity} from "../types/card";
+import {ValidationError} from "../utils/error";
 
 type CardRecordResults = [CardRecord[], FieldPacket[]];
 
@@ -13,18 +14,23 @@ export class CardRecord implements CardEntity{
     public deckId: string;
 
     constructor(obj: CardEntity) {
+        const {question,answer,id,memorized,deckId} = obj;
 
-        if (!obj.question || obj.question.length < 1 || obj.question.length > 100) {
-            throw new Error('The question must be between 1 and 100 characters long.')
+        if (!question || question.length < 1 || question.length > 100) {
+            throw new ValidationError('The question must be between 1 and 100 characters long.')
         }
-        if (!obj.answer || obj.answer.length < 1 || obj.answer.length > 100) {
-            throw new Error('The question must be between 1 and 250 characters long.')
+        if (!answer || answer.length < 1 || answer.length > 100) {
+            throw new ValidationError('The question must be between 1 and 250 characters long.')
         }
-        this.id = obj.id;
-        this.question = obj.question;
-        this.answer = obj.answer;
-        this.memorized = obj.memorized;
-        this.deckId = obj.deckId;
+        if (deckId === null || deckId.length !== 36 || typeof deckId !== "string"){
+            throw new ValidationError('you must choose a deck');
+        }
+
+        this.id = id;
+        this.question = question;
+        this.answer = answer;
+        this.memorized = memorized;
+        this.deckId = deckId;
 
     }
 
