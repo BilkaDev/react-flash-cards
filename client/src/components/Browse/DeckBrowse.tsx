@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import {CardEntity, DeckEntity} from "types";
-import {DeckSelect} from "../DeckSelect";
-import {Spinner} from "../../common/Spinner/Spinner";
+import {DeckSelect} from "../Deck/DeckSelect";
+import {Spinner} from "../common/Spinner/Spinner";
 import {DeckSelectTable} from "./DeckSelectTable";
 import {useParams} from "react-router-dom";
 

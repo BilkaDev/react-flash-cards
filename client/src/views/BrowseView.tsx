@@ -1,5 +1,5 @@
 import React from 'react';
-import {DeckBrowse} from "../components/Deck/Browse/DeckBrowse";
+import {DeckBrowse} from "../components/Browse/DeckBrowse";
 
 export const BrowseView = () => (
     <>

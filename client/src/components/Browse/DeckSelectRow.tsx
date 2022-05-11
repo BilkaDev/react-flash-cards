@@ -1,6 +1,6 @@
 import React from "react";
 import {CardEntity, DeckEntity} from "types";
-import {handleDelete} from "../../../utils/delete";
+import {handleDelete} from "../../utils/delete";
 import {Link} from 'react-router-dom';
 
 
