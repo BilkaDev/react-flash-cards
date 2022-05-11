@@ -5,6 +5,7 @@
     "sourceMap": true,
     "target": "ES6",
     "downlevelIteration": true,
+    "module": "commonJS",
     "lib": ["dom", "es6", "dom.iterable"],
     "outDir": "dist",
     "alwaysStrict" : true ,
